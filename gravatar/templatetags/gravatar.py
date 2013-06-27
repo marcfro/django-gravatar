@@ -2,7 +2,7 @@ import urllib
 
 from django import template
 from django.conf import settings
-from django.contrib.auth.models import User
+from django.contrib.auth import get_user_model
 from django.utils.hashcompat import md5_constructor
 from django.utils.html import escape
 from django.utils import simplejson
@@ -16,6 +16,7 @@ GRAVATAR_IMG_CLASS = getattr(settings, "GRAVATAR_IMG_CLASS", "gravatar")
 
 register = template.Library()
 
+User = get_user_model()
 
 def _imgclass_attr():
     if GRAVATAR_IMG_CLASS:
