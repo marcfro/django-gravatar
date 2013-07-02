@@ -1,7 +1,7 @@
 from distutils.core import setup
  
 setup(
-    name='django-gravatar',
+    name='marcfro-django-gravatar',
     version='0.1.0',
     description='Gravatar Support in a Django Reusable Application',
     author='James Tauber',
