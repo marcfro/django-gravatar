@@ -3,7 +3,7 @@ import urllib
 from django import template
 from django.conf import settings
 from django.contrib.auth import get_user_model
-from hashlib import md5
+import hashlib
 from django.utils.html import escape
 from django.utils import simplejson
 
@@ -39,7 +39,7 @@ def _get_user(user):
 
 
 def _get_gravatar_id(email):
-    return md5().update(email).hexdigest()
+    return hashlib.md5(email).hexdigest()
 
 
 @register.simple_tag
