@@ -5,7 +5,7 @@ from django.conf import settings
 from django.contrib.auth import get_user_model
 import hashlib
 from django.utils.html import escape
-from django.utils import simplejson
+import json
 
 GRAVATAR_URL_PREFIX = getattr(settings, "GRAVATAR_URL_PREFIX",
                                       "http://www.gravatar.com/")
@@ -137,7 +137,7 @@ def gravatar_profile_for_email(email):
         {% gravatar_profile_for_email someone@example.com %}
     """
     gravatar_url = "%s%s.json" % (GRAVATAR_URL_PREFIX, _get_gravatar_id(email))
-    return simplejson.load(urllib.urlopen(gravatar_url))
+    return json.loads(urllib.urlopen(gravatar_url))
 
 
 @register.simple_tag
