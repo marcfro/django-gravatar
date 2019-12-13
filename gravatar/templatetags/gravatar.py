@@ -39,7 +39,7 @@ def _get_user(user):
 
 
 def _get_gravatar_id(email):
-    return hashlib.md5(email).hexdigest()
+    return hashlib.md5(email.encode('utf-8')).hexdigest()
 
 
 @register.simple_tag
