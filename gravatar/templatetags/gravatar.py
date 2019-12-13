@@ -1,4 +1,9 @@
-import urllib
+try:
+    from urllib.request import urlopen as url_open
+    from urllib.parse import urlencode as url_encode
+except ImportError:
+    from urllib import urlopen as url_open
+    from urllib import urlencode as url_encode
 
 from django import template
 from django.conf import settings
@@ -65,7 +70,7 @@ def gravatar_for_email(email, size=None, rating=None):
     ) if p[1]]
 
     if parameters:
-        gravatar_url += '?' + urllib.urlencode(parameters, doseq=True)
+        gravatar_url += '?' + url_encode(parameters, doseq=True)
 
     return escape(gravatar_url)
 
@@ -137,7 +142,7 @@ def gravatar_profile_for_email(email):
         {% gravatar_profile_for_email someone@example.com %}
     """
     gravatar_url = "%s%s.json" % (GRAVATAR_URL_PREFIX, _get_gravatar_id(email))
-    return json.loads(urllib.urlopen(gravatar_url))
+    return json.loads(url_open(gravatar_url))
 
 
 @register.simple_tag
